@@ -1,70 +1,65 @@
-# Getting Started with Create React App
+# FastAPI Backend (vibecoded in 3h)
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+A modern FastAPI backend application with basic setup and configuration.
 
-## Available Scripts
+## Setup
 
-In the project directory, you can run:
+1. Create a virtual environment (if not already created):
+```bash
+python -m venv venv
+```
 
-### `npm start`
+2. Activate the virtual environment:
+- On macOS/Linux:
+```bash
+source venv/bin/activate
+```
+- On Windows:
+```bash
+.\venv\Scripts\activate
+```
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+3. Install dependencies:
+```bash
+pip install -r requirements.txt
+```
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## Running the Application
 
-### `npm test`
+To run the application, use the following command:
+```bash
+uvicorn main:app --reload
+```
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+The server will start at `http://localhost:8000`
 
-### `npm run build`
+## API Documentation
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Once the server is running, you can access:
+- Interactive API documentation (Swagger UI): `http://localhost:8000/docs`
+- Alternative API documentation (ReDoc): `http://localhost:8000/redoc`
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## Available Endpoints
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+- `GET /`: Welcome message
+- `GET /health`: Health check endpoint
+- `POST /register`: Register a new user
+  - Request body:
+    ```json
+    {
+        "Name": "string",
+        "Email": "string",
+        "Password": "string"
+    }
+    ```
+  - Returns user information (excluding password)
 
-### `npm run eject`
+## Database
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+The application uses SQLite as the database, which is automatically created when you first run the application. The database file will be created as `users.db` in the project root directory.
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+The database includes a `users` table with the following fields:
+- id (Integer, Primary Key)
+- name (String)
+- email (String, Unique)
+- password_hash (String) 
